@@ -4,7 +4,7 @@ import com.user_api.dto.StockDto;
 import com.user_api.dto.UserOrdersDto;
 import com.user_api.model.User;
 import com.user_api.model.UserOrders;
-import com.user_api.repository.BuyRepository;
+import com.user_api.model.UserStockBalances;
 import com.user_api.repository.UserOrdersRepository;
 import com.user_api.repository.UserStockBalancesRepository;
 import com.user_api.repository.UsersRepository;
@@ -18,6 +18,8 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.reactive.function.client.WebClient;
 
 import java.util.List;
+import java.util.Map;
+import java.util.Optional;
 
 @CrossOrigin
 @RestController
