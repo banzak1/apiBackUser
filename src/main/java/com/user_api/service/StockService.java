@@ -26,8 +26,6 @@ public class StockService {
     private WebClient webClient;
     @Autowired
     private UserOrdersRepository userOrdersRepository;
-    @Autowired
-    private UserOrdersController userOrdersController;
 
     @GetMapping
     public StockDto obterPorCodigo2(Long id, @RequestHeader("Authorization") String token) {
