@@ -4,6 +4,10 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
+
 import java.io.Serializable;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
@@ -14,27 +18,31 @@ import java.util.Objects;
 @Setter
 @Table(name = "user_stock_balances")
 public class UserStockBalances implements Serializable {
+    private static final long serialVersionUID = 2405172041950251807L;
     @EmbeddedId
     private UserStockBalance id;
-
-    private String stock_symbol;
-    private String stock_name;
+    @Column(name = "stock_symbol")
+    private String stockSymbol;
+    @Column(name = "stock_name")
+    private String stockName;
     private Long volume;
-    private Timestamp created_on;
-    private Timestamp updated_on;
+    @CreationTimestamp
+    @Column(name = "created_on")
+    private Timestamp created;
+    @UpdateTimestamp
+    @Column(name = "updated_on")
+    private Timestamp updated;
 
     public UserStockBalances() {
-        this.created_on = Timestamp.valueOf(LocalDateTime.now());
-        this.updated_on = Timestamp.valueOf(LocalDateTime.now());
+
     }
 
-    public UserStockBalances(UserStockBalance id, String stock_symbol, String stock_name, Long volume) {
+    public UserStockBalances(UserStockBalance id, String stockSymbol, String stockName, Long volume) {
         this.id = id;
-        this.stock_symbol = stock_symbol;
-        this.stock_name = stock_name;
+        this.stockSymbol = stockSymbol;
+        this.stockName = stockName;
         this.volume = volume;
-        this.created_on = Timestamp.valueOf(LocalDateTime.now());
-        this.updated_on = Timestamp.valueOf(LocalDateTime.now());
+
     }
 
 }

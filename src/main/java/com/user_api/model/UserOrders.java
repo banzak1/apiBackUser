@@ -4,6 +4,10 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
+
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.util.Objects;
@@ -17,17 +21,25 @@ public class UserOrders {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private Long id_stock;
-    private String stock_symbol;
-    private String stock_name;
+    @Column(name = "id_stock")
+    private Long idStock;
+    @Column(name = "stock_symbol")
+    private String stockSymbol;
+    @Column(name = "stock_name")
+    private String stockName;
     private Long volume;
     private Double price;
     private Integer type;
     private Integer status;
-    private Long remaining_value;
+    @Column(name = "remaining_value")
+    private Long remainingValue;
 
-    private Timestamp created_on;
-    private Timestamp updated_on;
+    @CreationTimestamp
+    @Column(name = "created_on")
+    private Timestamp created;
+    @UpdateTimestamp
+    @Column(name = "updated_on")
+    private Timestamp updated;
 
     @ManyToOne
     @JoinColumn(name = "id_user")
@@ -36,20 +48,9 @@ public class UserOrders {
     public UserOrders() {
     }
 
-    public UserOrders(User user, Long id, Long id_stock, String stock_symbol, String stock_name, Long volume,
-            Double price, Integer type, Integer status, Long remaining_value) {
-        this.user = user;
+    public UserOrders(Long id, Integer status) {
         this.id = id;
-        this.id_stock = id_stock;
-        this.stock_symbol = stock_symbol;
-        this.stock_name = stock_name;
-        this.volume = volume;
-        this.price = price;
-        this.type = type;
         this.status = status;
-        this.remaining_value = remaining_value;
-        this.created_on = Timestamp.valueOf(LocalDateTime.now());
-        this.updated_on = Timestamp.valueOf(LocalDateTime.now());
     }
 
     @Override
@@ -59,12 +60,12 @@ public class UserOrders {
         if (o == null || getClass() != o.getClass())
             return false;
         UserOrders that = (UserOrders) o;
-        return id.equals(that.id) && id_stock.equals(that.id_stock);
+        return id.equals(that.id) && idStock.equals(that.idStock);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, id_stock);
+        return Objects.hash(id, idStock);
     }
 
 }

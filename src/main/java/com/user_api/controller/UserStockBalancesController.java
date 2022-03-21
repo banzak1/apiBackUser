@@ -50,34 +50,33 @@ public class UserStockBalancesController {
 
     @PostMapping("/")
     public ResponseEntity<UserStockBalances> salvar(@RequestBody UserStockDto dto) {
-        User user = usersRepository.findById(dto.getId_user()).orElseThrow();
+        User user = usersRepository.findById(dto.getIdUser()).orElseThrow();
         UserStockBalances userStockBalances = userStockService.salvar(dto.tranformaParaObjeto(user));
         return new ResponseEntity<>(userStockBalances, HttpStatus.CREATED);
-        // UserStockBalances userStockBalances = dto.tranformaParaObjeto(user);
 
     }
 
     @GetMapping("/wallet/{id_user}")
-    public ResponseEntity<List<UserStockBalances>> getUser(@PathVariable("id_user") Long id_user) {
+    public ResponseEntity<List<UserStockBalances>> getUser(@PathVariable("id_user") Long idUser) {
         try {
-            return ResponseEntity.ok().body(service.getUser(id_user));
+            return ResponseEntity.ok().body(service.getUser(idUser));
+        } catch (Exception e) {
+            if (e.getMessage().equals("FAZENDA_NOT_FOUND"))
+                return ResponseEntity.notFound().build();
+            return ResponseEntity.badRequest().build();
+            // so
+        }
+    }
+
+    @GetMapping("/{idUser}/{stockName}")
+    public ResponseEntity<List<UserStockBalances>> getBalance(@PathVariable Long idUser,
+            @PathVariable String stockName) {
+        try {
+            return ResponseEntity.ok().body(service.getStock(idUser, stockName));
         } catch (Exception e) {
             if (e.getMessage().equals("FAZENDA_NOT_FOUND"))
                 return ResponseEntity.notFound().build();
             return ResponseEntity.badRequest().build();
         }
     }
-
-    @GetMapping("/{id_user}/{stock_name}")
-    public ResponseEntity<List<UserStockBalances>> getBalance(@PathVariable Long id_user,
-            @PathVariable String stock_name) {
-        try {
-            return ResponseEntity.ok().body(service.getStock(id_user, stock_name));
-        } catch (Exception e) {
-            if (e.getMessage().equals("FAZENDA_NOT_FOUND"))
-                return ResponseEntity.notFound().build();
-            return ResponseEntity.badRequest().build();
-        }
-    }
-
 }

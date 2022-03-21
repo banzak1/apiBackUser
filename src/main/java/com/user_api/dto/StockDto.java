@@ -1,40 +1,29 @@
 package com.user_api.dto;
 
-import com.user_api.model.User;
-import com.user_api.model.UserOrders;
 import lombok.Getter;
 import lombok.Setter;
-
-import java.sql.Timestamp;
-import java.time.LocalDateTime;
 
 @Getter
 @Setter
 public class StockDto {
     private Long id;
-    private String stock_symbol;
-    private String stock_name;
-    private Double ask_min;
-    private Double ask_max;
-    private Double bid_min;
-    private Double bid_max;
-    private Timestamp created_on;
-    private Timestamp updated_on;
+    private String stockSymbol;
+    private String stockName;
+    private Double askMin;
+    private Double askMax;
+    private Double bidMin;
+    private Double bidMax;
 
-    public StockDto(Long id, String stock_symbol, String stock_name, Double ask_min, Double ask_max, Double bid_min,
-            Double bid_max, Timestamp created_on, Timestamp updated_on) {
+    public StockDto(Long id, String stockSymbol, String stockName, Double askMin, Double askMax, Double bidMin, Double bidMax) {
         this.id = id;
-        this.stock_symbol = stock_symbol;
-        this.stock_name = stock_name;
-        this.ask_min = ask_min;
-        this.ask_max = ask_max;
-        this.bid_min = bid_min;
-        this.bid_max = bid_max;
-        this.created_on = created_on;
-        this.updated_on = updated_on;
+        this.stockSymbol = stockSymbol;
+        this.stockName = stockName;
+        this.askMin = askMin;
+        this.askMax = askMax;
+        this.bidMin = bidMin;
+        this.bidMax = bidMax;
     }
-
-    public StockDto tranformaParaObjeto1() {
-        return new StockDto(id, stock_symbol, stock_name, ask_min, ask_max, bid_min, bid_max, created_on, updated_on);
+    public StockDto tranformaParaObjeto1(){
+        return new StockDto (id, stockSymbol, stockName, askMin, askMax, bidMin, bidMax);
     }
 }

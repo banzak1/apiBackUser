@@ -7,9 +7,10 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface UsersRepository extends JpaRepository<User, Long> {
-    @Query(value = "SELECT * from users where id= 1", nativeQuery = true)
-    List<UserOrders> findByUser();
+    @Query(value = "SELECT * from users where username= ?1", nativeQuery = true)
+    Optional<User> findByUser(String username);
 }

@@ -11,18 +11,27 @@ import lombok.Setter;
 @Setter
 public class UserOrdersDto {
     private Long id;
-    private Long id_user;
-    private Long id_stock;
-    private String stock_symbol;
-    private String stock_name;
+    private Long idUser;
+    private Long idStock;
+    private String stockSymbol;
+    private String stockName;
     private Long volume;
     private Double price;
     private Integer type;
     private Integer status;
-    private Long remaining_value;
+    private Long remainingValue;
 
     public UserOrders tranformaParaObjeto1(User user) {
-        return new UserOrders(user, id, id_stock, stock_symbol, stock_name, volume, price, type, status,
-                remaining_value);
+        UserOrders uo = new UserOrders();
+        uo.setUser(user);
+        uo.setIdStock(idStock);
+        uo.setStockName(stockName);
+        uo.setStockSymbol(stockSymbol);
+        uo.setVolume(volume);
+        uo.setPrice(price);
+        uo.setType(type);
+        uo.setStatus(status);
+        uo.setRemainingValue(remainingValue);
+        return uo;
     }
 }

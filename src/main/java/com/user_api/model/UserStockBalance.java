@@ -14,14 +14,15 @@ import java.util.Objects;
 @Getter
 @Setter
 public class UserStockBalance implements Serializable {
+    private static final long serialVersionUID = 1905122041950251207L;
 
-    private Long id_stock;
+    private Long idStock;
     @ManyToOne
     @JoinColumn(name = "id_user")
     private User user;
 
-    public UserStockBalance(User user, Long id_stock) {
-        this.id_stock = id_stock;
+    public UserStockBalance(User user, Long idStock) {
+        this.idStock = idStock;
         this.user = user;
     }
 
@@ -35,11 +36,11 @@ public class UserStockBalance implements Serializable {
         if (o == null || getClass() != o.getClass())
             return false;
         UserStockBalance that = (UserStockBalance) o;
-        return Objects.equals(id_stock, that.id_stock) && Objects.equals(user, that.user);
+        return Objects.equals(idStock, that.idStock) && Objects.equals(user, that.user);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id_stock, user);
+        return Objects.hash(idStock, user);
     }
 }

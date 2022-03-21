@@ -17,7 +17,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 
-@CrossOrigin(origins = "http://localhost:8080")
+@CrossOrigin(origins = "http://localhost:8081")
 @SpringBootApplication
 @RestController
 public class BackUserApplication {
@@ -25,15 +25,12 @@ public class BackUserApplication {
 	@Bean
 	public WebClient webClient(WebClient.Builder builder) {
 		return builder
-				.baseUrl("http://localhost:8083")
+				.baseUrl("http://localhost:8085")
 				.defaultHeader(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
 				.build();
 	}
 
-	@GetMapping("/")
-	public String welcome2user(Principal principal) {
-		return "Hi " + principal.getName() + " Welcome to javatech";
-	}
+
 
 	public static void main(String[] args) {
 		SpringApplication.run(BackUserApplication.class, args);

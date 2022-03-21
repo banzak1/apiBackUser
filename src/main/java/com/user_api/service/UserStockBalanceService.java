@@ -12,13 +12,11 @@ import java.util.List;
 public class UserStockBalanceService {
     private final UserStockBalancesRepository repository;
 
-    public List<UserStockBalances> getStock(Long id_user, String stock_name) throws Exception {
-        List<UserStockBalances> userStockBalances = repository.listCarteira2(id_user, stock_name);
-        return userStockBalances;
+    public List<UserStockBalances> getStock(Long idUser, String stockName) {
+        return repository.listCarteira2(idUser, stockName);
     }
 
-    public List<UserStockBalances> getUser(Long id_user) throws Exception {
-        List<UserStockBalances> userStockBalances = repository.listCarteira(id_user);
-        return userStockBalances;
+    public List<UserStockBalances> getUser(Long idUser) {
+        return repository.listCarteira(idUser);
     }
 }

@@ -2,7 +2,6 @@ package com.user_api.service;
 
 import com.user_api.controller.UserOrdersController;
 import com.user_api.dto.StockDto;
-import com.user_api.dto.UserStockDto;
 import com.user_api.model.UserStockBalances;
 import com.user_api.repository.UserOrdersRepository;
 import net.minidev.json.JSONObject;
@@ -11,10 +10,8 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.reactive.function.BodyInserter;
 import org.springframework.web.reactive.function.BodyInserters;
 import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Mono;
@@ -40,12 +37,7 @@ public class StockService {
                 .header(HttpHeaders.AUTHORIZATION, token)
                 .retrieve()
                 .bodyToMono(StockDto.class);
-
-        monoStock.subscribe(s -> {
-            System.out.println("acabou");
-        });
-        StockDto stock = monoStock.block();
-        return stock;
+        return monoStock.block();
     }
 
     @GetMapping("/stocks")
@@ -61,14 +53,12 @@ public class StockService {
     }
 
     public StockDto teste1(Long id, @RequestHeader("Authorization") String token) {
-        // StockDto stockDto = new StockDto(id, "teste3", "teste3", 5.0, 6.0, 7.0, 8.0,
-        // null, null);
         JSONObject json = new JSONObject();
         json.put("id", id);
-        json.put("ask_min", userOrdersRepository.getAskMin(id));
-        json.put("ask_max", userOrdersRepository.getAskMax(id));
-        json.put("bid_min", userOrdersRepository.getBidMin(id));
-        json.put("bid_max", userOrdersRepository.getBidMax(id));
+        json.put("askMin", userOrdersRepository.getAskMin(id));
+        json.put("askMax", userOrdersRepository.getAskMax(id));
+        json.put("bidMin", userOrdersRepository.getBidMin(id));
+        json.put("bidMax", userOrdersRepository.getBidMax(id));
         Mono<StockDto> monoStock = this.webClient
                 .post()
                 .uri("/teste")
@@ -76,7 +66,6 @@ public class StockService {
                 .body(BodyInserters.fromValue(json))
                 .retrieve()
                 .bodyToMono(StockDto.class);
-        StockDto stock = monoStock.block();
-        return stock;
+        return monoStock.block();
     }
 }
