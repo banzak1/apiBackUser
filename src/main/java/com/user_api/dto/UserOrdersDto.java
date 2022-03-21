@@ -2,8 +2,6 @@ package com.user_api.dto;
 
 import com.user_api.model.User;
 import com.user_api.model.UserOrders;
-import com.user_api.model.UserStockBalance;
-import com.user_api.model.UserStockBalances;
 import lombok.Getter;
 import lombok.Setter;
 

@@ -15,7 +15,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.reactive.function.client.WebClient;
 
 import java.util.List;
 import java.util.Map;
@@ -29,8 +28,7 @@ public class UserOrdersController {
     private UserOrdersRepository userOrdersRepository;
     @Autowired
     private UsersRepository usersRepository;
-    @Autowired
-    private WebClient webClient;
+
     @Autowired
     private StockService stockService;
     @Autowired

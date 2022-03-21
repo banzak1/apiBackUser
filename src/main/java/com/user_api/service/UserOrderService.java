@@ -1,36 +1,26 @@
 package com.user_api.service;
 
-import com.user_api.dto.UserOrdersDto;
+
 import com.user_api.model.User;
 import com.user_api.model.UserOrders;
 import com.user_api.model.UserStockBalance;
 import com.user_api.model.UserStockBalances;
 import com.user_api.repository.UserOrdersRepository;
 import com.user_api.repository.UserStockBalancesRepository;
-import com.user_api.repository.UsersRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.reactive.function.client.WebClient;
 import org.springframework.web.server.ResponseStatusException;
 
-import java.sql.SQLException;
 import java.util.List;
 
 @Service
 public class UserOrderService {
     @Autowired
     private UserOrdersRepository userOrdersRepository;
-    @Autowired
-    private UsersRepository usersRepository;
-    @Autowired
-    private WebClient webClient;
-    @Autowired
-    private StockService stockService;
     @Autowired
     private UserStockBalancesRepository repository;
 

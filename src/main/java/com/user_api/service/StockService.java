@@ -1,6 +1,5 @@
 package com.user_api.service;
 
-import com.user_api.controller.UserOrdersController;
 import com.user_api.dto.StockDto;
 import com.user_api.model.UserStockBalances;
 import com.user_api.repository.UserOrdersRepository;

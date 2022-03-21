@@ -1,6 +1,5 @@
 package com.user_api.repository;
 
-import com.user_api.model.User;
 import com.user_api.model.UserOrders;
 
 import org.springframework.data.domain.Page;
